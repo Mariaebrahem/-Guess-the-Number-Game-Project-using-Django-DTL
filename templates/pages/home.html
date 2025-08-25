@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>🎮 لعبة التخمين</title>
+    <style>
+        body { font-family: Arial; direction: rtl; text-align: center; padding: 30px; }
+        input[type="number"] { width: 80px; padding: 5px; }
+        button { padding: 5px 15px; }
+        .result { margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h1>🎯 لعبة تخمين الرقم من 1 إلى 10</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label>أدخل رقمك:</label>
+        <input type="number" name="guess" min="1" max="10" required>
+        <button type="submit">تحقق</button>
+    </form>
+
+    {% if message %}
+        <div class="result">
+            <p>{{ message|safe }}</p>
+        </div>
+    {% endif %}
+
+    {% if guess %}
+        <p>تخمينك الأخير: {{ guess|default:"لا يوجد" }}</p>
+    {% endif %}
+</body>
+</html>
+
+
+
+
+{% endblock content %}
+
